@@ -14,9 +14,21 @@ const app = Vue.createApp({
         return {
             //quotes: quotes,
             quotes,
+            // dato por defecto 'Hola Mundo'
+            newQuote: 'Hola mundo',
         }
-    },  
-    
-})
+    }, 
+    methods: {
+        addQuote( event ) {
+            console.log(this.newQuote)
+            console.log(event)
 
+            // Añadir al principio del array el valor
+            this.quotes.unshift({
+                quote: this.newQuote
+            })
+        }
+
+    }    
+}) 
 app.mount('#myApp')
