@@ -7,25 +7,34 @@
 <body>
     <!-- Control absoluto de este DIV -->
     <div id="myApp">  
-        <h1>Batman quotes</h1>      
+        <h1>Batman quotes <small>{{ newQuote }}</small> </h1>    
+        <!-- Introducir en el array quote un nuevo valor. Se ejecuta solo cuando se pulsa enter.-->
+        <input type="text" v-model="newQuote" v-on:keypress.enter="addQuote">
+        <hr>
 
         <ul >
-            <!-- <li v-for="quote in quotes">
+            <!-- Recorrer el array del js. Controlar que si no tiene autor no lo muestre-->
+
+    <!-- v-if, valor booleano , el elemento no se construye, no se ve en consola-->
+            <li v-for="quote in quotes">
                 <span>{{ quote.quote }}</span>    
-                <blockquote>-{{ quote.author }}</blockquote>            
-            </li> -->
+                <!-- <blockquote v-if="quote.author">-{{ quote.author }}</blockquote>  -->
+    <!-- v-show, valor booleano, el elemento se construye le aplica un display none en el style, se ve en la consola -->
+                <blockquote v-show="quote.author">-{{ quote.author }}</blockquote>            
+            </li>
 
-            <!-- Otra forma de hacer lo anterior pero desustructurando, de la siguiente forma el acceso es mas directo -->
-
+            <!-- Otra forma de hacer lo anterior pero desustructurando, de la siguiente forma el acceso es mas directo 
+            El index existe de forma predefinida-->
+            <br><hr>
             <li v-for="({ quote, author }, index) in quotes">
                 <!-- mostrar el índice del elemento que estoy iterando , el index se extrae si se necesita -->
                 <span>{{ index + 1 }} -- {{ quote }}</span>    
                 <blockquote>-{{ author }}</blockquote>            
             </li>
-
+            <br><hr>
         </ul>
     </div>
-
+    /*IMPORTACION DE VUEjs*/
     <script src="https://unpkg.com/vue@next"></script>
 
     <script src="app.js"></script>
