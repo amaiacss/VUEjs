@@ -1,5 +1,8 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
+  <!-- title es un atributo, el cual se usará únicamente en este component -->
+  <Counter title="Entraron"/>
+
   <Counter />
 </template>
 
@@ -9,7 +12,7 @@ import Counter from './components/Counter.vue'
 export default {
   components: { Counter },
   // Este name es para identificarlo en el vue developments tools
-  name: 'Patito',
+  name: 'App',
   components: {
     Counter
   }

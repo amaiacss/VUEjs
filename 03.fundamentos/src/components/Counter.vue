@@ -1,5 +1,7 @@
+<!--ESTO ES LA DEFINICIÓN DE UN COMPONENTE QUE SE IMPORTARÁ DESDE App.vue -->
 <template>
-  <h2>Counter!!!</h2>
+<!-- Si title es undefined se muestra la opción -->
+  <h2>{{ customTitle }}</h2>
   <p>{{ counter }} <sup>2</sup>= {{ counter * counter }}</p>
   
   <!-- Estos párrafos se han usando para conocer el comportamiento de computed 
@@ -18,6 +20,9 @@
 
 <script>
 export default {
+// Estas son las propiedades de entrada de este componente. Hay 3 formas comunes de definir una property( atributo ):
+// 1. Definirlo como un array de Strings con el nombre del atributo
+  props: ['title'],
   data() {
     // retorno un objeto
     return {
@@ -46,6 +51,9 @@ export default {
         // Sólo recalculará si el counter internamente cambiara, detecta si una de sus dependencias cambia
         console.log('computed squareCounter')
         return this.counter * this.counter
+      },
+      customTitle() {
+        return this.title || 'Counter'
       }
   }
 
