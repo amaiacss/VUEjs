@@ -3,7 +3,13 @@
   <!-- title es un atributo, el cual se usará únicamente en este component -->
   <Counter title="Entraron"/>
 
-  <Counter />
+<!-- cada uno de estos elementos mantienen su propio estado e independiente -->
+  <!-- <Counter /> -->
+
+<!-- Se declara un atributo(en el componente Counter.vue no está declarado como props, esa es la diferencia entre property y atributtes) -->
+  <Counter :start="100"/>
+
+
 </template>
 
 <script>
