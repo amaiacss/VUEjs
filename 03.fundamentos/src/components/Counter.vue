@@ -22,19 +22,31 @@
 export default {
 // Estas son las propiedades de entrada de este componente. Hay 3 formas comunes de definir una property( atributo ):
 // 1. Definirlo como un array de Strings con el nombre del atributo
-  props: ['title'],
+  props: {
+    title: String,// Declaracion tipo de props
+    start: {
+      type: Number,
+      default: 100, // valor por defecto
+      //required: true
+      // VALIDACIONES DE ESTA PROPIEDAD
+      // Recibe como argumento el value que se recibe en App.vue( :start="10", el 10 es el value )
+      validator( value ) {
+        return value > 100
+      }
+    }
+  },
   data() {
     // retorno un objeto
     return {
       //todo elemento que se declare aquí va a ser reactivo
-      counter: 5
+      // este start es una props y el valor lo recibe en App.vue, si no tiene valor , no mostrará nada
+      counter: this.start
 
     }
   },
   methods: {
     // Mantener en caché el calculo 
-    getSquareValue() {
-      
+    getSquareValue() {      
       return this.counter * this.counter
     },
     increase() {
@@ -47,11 +59,13 @@ export default {
   // Es un objeto parecido a los métodos, las propiedades computadas se guardan en el caché para que sea mas eficiente el proceso
   computed: {
       squareCounter() {
-        // si me fijo en la consola a pesar de en el template repetirse 5 veces la misma línea ,el cálculo sólo lo hace una vezy lo muestra las veces que sea llamado
+        // si me fijo en la consola a pesar de en el template repetirse 5 veces la misma línea ,el cálculo sólo lo hace una vez y lo muestra las veces que sea llamado
+
         // Sólo recalculará si el counter internamente cambiara, detecta si una de sus dependencias cambia
         console.log('computed squareCounter')
         return this.counter * this.counter
       },
+      // Este método mostrará la propiedad 'title' que se creó en el template del elemento, si no tiene tittle muestra 'Counter'
       customTitle() {
         return this.title || 'Counter'
       }
