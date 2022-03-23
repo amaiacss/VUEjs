@@ -1,13 +1,14 @@
 <template>
-    <img src="https://azurecomcdn.azureedge.net/cvt-b25e2f3ec9c26362149a7eee6f74a05256aebbf9fc0478ff53685ffa53bf98b1/images/shared/social/azure-icon-250x250.png" alt="bg">
+    <img v-if="img" :src="img" alt="bg">
     <div class="bg-dark"></div>
 
     <div class="indecision-container">
-        <input type="text" placeholder="Hazme una pregunta" name="" id="">
+        <input v-model='question' type="text" placeholder="Hazme una pregunta">
         <p>Recuerda terminar con un signo de interrogación ( ? )</p>
-        <div>
-            <h2>Seré millonario?</h2>
-            <h1>Si, No, .... pensando</h1>
+        
+        <div v-if="isValidQuestion">
+            <h2>{{ question }}</h2>
+            <h1>{{ answer }}</h1>
         </div>
     </div>
 
@@ -15,7 +16,38 @@
 
 <script>
 export default {
+    data() {
+        return {
+            question: null,
+            answer: null,
+            img: null,
+            isValidQuestion: false                 
+        }
+    },
+    methods: {
+        async getAnswer() {
+            this.answer = 'Pensando...'
 
+            const { answer, image } = await fetch('https://yesno.wtf/api').then( r =>r.json() )
+            this.answer = answer === 'yes' ? 'Si!' : 'No!'
+
+            this.img = image
+        }
+    },
+    watch: {
+        // Debe llamarse igual que la propiedad que se quiere observar si cambia, se va a estar disparando cada vez que el question cambie
+        question( value, oldValue ) {
+            this.isValidQuestion = false
+            // si el valor incluye un signo de ? entonces dispara la peticion a la API
+            if( value.includes('?') ) {
+                this.isValidQuestion = true
+                // Realizar petición http
+                this.getAnswer()
+            }
+
+
+        }
+    }
 }
 </script>
 
