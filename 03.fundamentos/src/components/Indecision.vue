@@ -26,18 +26,26 @@ export default {
     },
     methods: {
         async getAnswer() {
-            this.answer = 'Pensando...'
+            try {
+                this.answer = 'Pensando...'
 
-            const { answer, image } = await fetch('https://yesno.wtf/api').then( r =>r.json() )
-            this.answer = answer === 'yes' ? 'Si!' : 'No!'
+                const { answer, image } = await fetch('https://yesno.wtf/api').then( r =>r.json() )
+                this.answer = answer === 'yes' ? 'Si!' : 'No!'
 
-            this.img = image
+                this.img = image
+            } catch(error) {
+                console.log("IndecisionComponent: ", error)
+                this.answer = 'No se pudo cargar del API'
+                this.img = null 
+            }
         }
     },
     watch: {
         // Debe llamarse igual que la propiedad que se quiere observar si cambia, se va a estar disparando cada vez que el question cambie
         question( value, oldValue ) {
             this.isValidQuestion = false
+
+            console.log( {value}  )
             // si el valor incluye un signo de ? entonces dispara la peticion a la API
             if( value.includes('?') ) {
                 this.isValidQuestion = true

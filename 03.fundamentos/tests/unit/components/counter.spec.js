@@ -5,7 +5,7 @@ import { shallowMount } from '@vue/test-utils'
 import Counter from '@/components/Counter'
 
 describe('Counter Component', () => {
-    // Para no repetir el shallowMount en cada test podemos hacer los siguientes, por cada test inicializa el shallowMount, de esta forma lo eventos ocurridos en un tes no afectan al siguiente test
+    // Para no repetir el shallowMount en cada test podemos hacer los siguientes, por cada test inicializa el shallowMount, de esta forma lo eventos ocurridos en un test no afectan al siguiente test
     let wrapper
     // Counter es el nombre del component
     beforeEach(() => {
