@@ -3,6 +3,8 @@
 <!-- Si title es undefined se muestra la opción -->
   <h2>{{ customTitle }}</h2>
   <p>{{ counter }} <sup>2</sup>= {{ counter * counter }}</p>
+  <!-- Para realizar los test-unit, se recomienda al elemento agregarle un data atributte, de esta forma, si el class, el id o la posición del <p> en el html cambia , la lógica del test no se ve afectada-->
+  <p data-testid="counter">{{ counter}}</p>
   
   <!-- Estos párrafos se han usando para conocer el comportamiento de computed 
   <p>{{ counter }} <sup>2</sup>= {{ squareCounter }}</p>
@@ -31,7 +33,7 @@ export default {
       // VALIDACIONES DE ESTA PROPIEDAD
       // Recibe como argumento el value que se recibe en App.vue( :start="10", el 10 es el value )
       validator( value ) {
-        return value > 100
+        return value >= 0
       }
     }
   },
