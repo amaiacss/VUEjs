@@ -10,3 +10,7 @@
         
     cd 04.pokemon.game
     npm run serve
+
+###Paquete axios, peticiones http
+    npm install axios
+    

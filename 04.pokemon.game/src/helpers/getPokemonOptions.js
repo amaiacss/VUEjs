@@ -1,3 +1,5 @@
+import pokemonApi from "../api/pokemonApi"
+
 //LÓGICA PARA EL EJERCICIO
 const getPokemons = () => {
     // Crear un array con 650 posiciones vacías, que tendrá los nombres
@@ -7,17 +9,39 @@ const getPokemons = () => {
 }
 
 // Esta es la funcion que se va a exportar
-const getPokemonOptions = () => {
+const getPokemonOptions = async() => {
     // hacerle un mix, coger el array y mezclarlo de forma aleatoria usando sort() y Math
     const mixedPokemons = getPokemons().sort( () => Math.random() - 0.5 )
 
     // se modifica el array, manteniendo las posiciones 0 a 4 , el resto se eliminan
-    getPokemonNames( mixedPokemons.splice(0, 4) )
-}
-// recibir un array de 4 posiciones con la finalidad de tener los nombres
-const getPokemonNames = ( [a,b,c,d] = []) => {
+    // la funcion getPokemonNames al ser async, hay que esperar que realice la peticón para resolverla por lo que hay que poner el await y a su vez la función 'padre' entonces también debe ser async
+    const pokemons = await getPokemonNames( mixedPokemons.splice(0, 4) )
 
-    console.log(a,b,c,d);
+    console.table(pokemons)
+
+    return pokemons
+}
+
+// recibir un array de 4 posiciones con la finalidad de tener los nombres
+const getPokemonNames = async ( [a,b,c,d] = []) => {
+    // Definición del array que se mandará a la promise, definición de peticiones
+    const promiseArr = [
+        pokemonApi.get(`/${ a }`),
+        pokemonApi.get(`/${ b }`),
+        pokemonApi.get(`/${ c }`),
+        pokemonApi.get(`/${ d }`)
+    ]
+
+    // Dispira varias promesas de manera simultanéa, el dato que se recibe es un array, por lo que se puede desestructurar
+    const [p1, p2, p3, p4] = await Promise.all( promiseArr )
+
+    // Devuelvo el mismo array pero con los nombres de los pokemons
+    return [
+        {name: p1.data.name, id: p1.data.id},
+        {name: p2.data.name, id: p2.data.id},
+        {name: p3.data.name, id: p3.data.id},
+        {name: p4.data.name, id: p4.data.id}
+    ]
 }
 
 
