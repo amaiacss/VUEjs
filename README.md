@@ -11,6 +11,11 @@
     cd 04.pokemon.game
     npm run serve
 
-###Paquete axios, peticiones http
+### Paquete axios, peticiones http
     npm install axios
     
+### Desplegar app vue
+    Para generar la aplicación de produccion, en la terminal
+    npm run build
+
+    Los archivos que genera se encuentran en la capeta dist, que se genera al ejecutar el build
