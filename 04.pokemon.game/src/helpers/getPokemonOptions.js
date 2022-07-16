@@ -1,7 +1,7 @@
 import pokemonApi from "../api/pokemonApi"
 
 //LÓGICA PARA EL EJERCICIO
-const getPokemons = () => {
+export const getPokemons = () => {
     // Crear un array con 650 posiciones vacías, que tendrá los nombres
     const pokemonsArr = Array.from( Array(650) )
     // map modifica el array, en este caso la primera posicion no interesa, por eso se pone esto(_), y el segundo es el index, que lo retornará con + 1
@@ -23,7 +23,7 @@ const getPokemonOptions = async() => {
 }
 
 // recibir un array de 4 posiciones con la finalidad de tener los nombres
-const getPokemonNames = async ( [a,b,c,d] = []) => {
+export const getPokemonNames = async ( [a,b,c,d] = []) => {
     // Definición del array que se mandará a la promise, definición de peticiones
     const promiseArr = [
         pokemonApi.get(`/${ a }`),
@@ -44,5 +44,5 @@ const getPokemonNames = async ( [a,b,c,d] = []) => {
     ]
 }
 
-
+// exportación por defecto, las otras funciones tienen la directiva export, en este caso paro poder hacer las pruebas unitarias
 export default getPokemonOptions

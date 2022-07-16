@@ -7,4 +7,5 @@ const pokemonApi = axios.create({
 
 }) 
 
+// exportacion por defecto para usar en otras partes
 export default pokemonApi   
