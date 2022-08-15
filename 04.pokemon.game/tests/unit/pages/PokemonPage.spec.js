@@ -20,4 +20,21 @@ describe('Pokemon Page Component', () => {
         shallowMount( PokemonPage )
         expect( mixPokemonArraySpy ).toHaveBeenCalled()
     })
+    test('Debe hacer match con el snapshot cuando cargan los pokemons', () => {
+        //montar el componente y mandarle la data con los datos como quiero hacer la prueba
+        const wrapper = shallowMount( PokemonPage, {
+            data() {
+                return {
+                    pokemonArr: mockPokemons ,
+                    pokemon:mockPokemons[0],
+                    showPokemon:false,
+                    showAnswer: false,
+                    message: ''
+                }
+            }
+        })
+
+        expect( wrapper.html() ).toMatchSnapshot()
+
+    })
 })
