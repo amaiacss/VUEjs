@@ -59,4 +59,30 @@ describe('Pokemon Page Component', () => {
         expect( wrapper.find('pokemon-picture-stub').attributes('pokemonid') ).toBe('1')
         expect( wrapper.find('pokemon-options-stub').attributes('pokemons') ).toBeTruthy()
     })
+
+    test('pruebas con ckeckAnswer', async () => {
+        const wrapper = shallowMount( PokemonPage, {
+            data() {
+                return {
+                    pokemonArr: mockPokemons ,
+                    pokemon: mockPokemons[0],
+                    showPokemon:false,
+                    showAnswer: false,
+                    message: ''
+                }
+            }
+        })
+        //llamar al método
+        await wrapper.vm.checkAnswer(1)
+        //Cuando chekAnswer finalice, existirá un h2
+        expect( wrapper.find('h2').exists() ).toBeTruthy()
+        // showPokemon se inicializa en false, pero despues del método checkAnswer pasa a ser true
+        expect( wrapper.vm.showPokemon ).toBeTruthy()
+        // comprobar el textp del h2
+        expect( wrapper.find('h2').text() ).toBe(`Correcto, ${ mockPokemons[0].name }`)
+        //lanzar esta funci-on para que nos devuelva mensaje de de incorrecto
+        await wrapper.vm.checkAnswer(10)
+
+        expect( wrapper.vm.message ).toBe(`Ooops, era ${ mockPokemons[0].name }`)
+    })
 })
