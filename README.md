@@ -1,5 +1,10 @@
+### Vue por primera vez
+Necesario tener instalado composer
+Instalar Vue, podría de forma global
+npm install -g @vue/cli
 ### Crear un nuevo proyecto Vue
-    ubicarse en la carpeta padre en este caso 4.Vue
+    Desde el símbolo del sistema
+    ubicarse en la carpeta padre en este caso 4.Vuejs ( cd D: )
     Ejecutar : vue create 04.pokemon-game
         1. Manually select features
         2. Seleccionar Unit Testing
