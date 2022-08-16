@@ -19,6 +19,8 @@ npm run build
 ```
 npm run test:unit
 ```
+```forzar que nuevamente cree el snapshot
+npm run test:unit pokemonpage -u
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

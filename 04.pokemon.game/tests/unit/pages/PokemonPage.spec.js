@@ -1,5 +1,7 @@
 import { shallowMount, mount} from '@vue/test-utils'
 import PokemonPage from '@/pages/PokemonPage'
+// importar array para la prueba 3
+import { mockPokemons } from '../mocks/pokemons.mock'
 
 describe('Pokemon Page Component', () => {
 
@@ -36,5 +38,25 @@ describe('Pokemon Page Component', () => {
 
         expect( wrapper.html() ).toMatchSnapshot()
 
+    })
+
+    test('Debe mostrar los componentes de PokemonPicture y PokemonOptions', () => {
+        const wrapper = shallowMount( PokemonPage, {
+            data() {
+                return {
+                    pokemonArr: mockPokemons ,
+                    pokemon:mockPokemons[0],
+                    showPokemon:false,
+                    showAnswer: false,
+                    message: ''
+                }
+            }
+        })
+
+        expect( wrapper.find('pokemon-picture-stub').exists() ).toBeTruthy()
+        expect( wrapper.find('pokemon-options-stub').exists() ).toBeTruthy()
+
+        expect( wrapper.find('pokemon-picture-stub').attributes('pokemonid') ).toBe('1')
+        expect( wrapper.find('pokemon-options-stub').attributes('pokemons') ).toBeTruthy()
     })
 })
