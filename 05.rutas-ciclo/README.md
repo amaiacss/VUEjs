@@ -28,8 +28,10 @@ Estas son las opciones seleccionado en el proceso de instalción de esta aplicac
     4. Jest
     5. In dedicated config files
     6. N (no grabar esta configuracion)
+
 Una vez finalizado, seguimos instrucciones
     cd 05.rutas-ciclo
     npm run serve
-    
-    De las carpetas borramos.....
+
+### Instalar la dependecia router
+    npm install vue-router@4
